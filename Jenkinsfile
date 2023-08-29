@@ -1,8 +1,4 @@
 pipeline {
-  stage('Initialize'){
-      def dockerHome = tool 'myDocker'
-      env.PATH = "${dockerHome}/bin:${env.PATH}"
-  }
   
   agent {
     docker {
@@ -11,6 +7,10 @@ pipeline {
 
   }
   stages {
+    stage('Initialize'){
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+    }
     stage('Stage 1') {
       parallel {
         stage('Stage 1') {
