@@ -4,13 +4,8 @@ pipeline {
     docker {
       image 'maven:3.9.4'
     }
-
   }
   stages {
-    stage('Initialize'){
-        def dockerHome = tool 'myDocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-    }
     stage('Stage 1') {
       parallel {
         stage('Stage 1') {
