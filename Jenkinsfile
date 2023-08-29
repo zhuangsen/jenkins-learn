@@ -1,24 +1,10 @@
 pipeline {
-    agent none
+    agent { docker 'maven:3.3.3' }
     stages {
-        stage('Build') {
-            agent {
-                docker {
-                    image 'maven:3-alpine'
-                    args '-v /root/.m2:/root/.m2'
-                }
-            }
+        stage('build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn --version'
             }
         }
-        stage('docker-build') {
-                agent any
-                steps {
-                    sh '''cd /var/jenkins_home/workspace/simple-java-maven-app1/target
-                    cp ../Dockerfile ./
-                    docker build -t testproject .'''
-                }
-            }
     }
 }
