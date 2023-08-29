@@ -1,31 +1,15 @@
 pipeline {
-  
   agent {
     docker {
-      image 'maven:3.9.4'
+      image 'node:6-alpine'
+      args '-p 3100:3000'
     }
+
   }
   stages {
-    stage('Stage 1') {
-      parallel {
-        stage('Stage 1') {
-          steps {
-            echo 'Hello world!'
-          }
-        }
-
-        stage('Stage 2') {
-          steps {
-            echo 'hello stage2'
-          }
-        }
-
-        stage('Stage 3') {
-          steps {
-            sleep 5
-          }
-        }
-
+    stage('Build') {
+      steps {
+        sh 'npm install'
       }
     }
 
